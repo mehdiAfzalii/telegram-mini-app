@@ -12,7 +12,7 @@
 
     <title>My Telegram Mini App</title>
 
-    <link rel="stylesheet" href="style.css?v=5">
+    <link rel="stylesheet" href="style.css?v=6">
 
 </head>
 
@@ -31,31 +31,53 @@
         </header>
 
 
-        <section class="card">
+        <!-- User Profile -->
+        <section class="profile-card">
 
-            <h2>User Profile</h2>
+            <div class="profile-image-container">
 
-            <div class="user-info">
+                <img
+                    id="profile-photo"
+                    class="profile-image"
+                    src=""
+                    alt="Profile Photo"
+                >
 
-                <p>
-                    <strong>First Name:</strong>
-                    <span id="first-name">---</span>
+                <div
+                    id="profile-placeholder"
+                    class="profile-placeholder"
+                >
+                    ?
+                </div>
+
+            </div>
+
+
+            <div class="profile-details">
+
+                <h2 id="full-name">
+                    User
+                </h2>
+
+                <p id="username">
+                    @username
                 </p>
 
-                <p>
-                    <strong>Last Name:</strong>
-                    <span id="last-name">---</span>
-                </p>
+            </div>
 
-                <p>
-                    <strong>Username:</strong>
-                    <span id="username">---</span>
-                </p>
 
-                <p>
-                    <strong>User ID:</strong>
-                    <span id="user-id">---</span>
-                </p>
+            <div class="user-id-container">
+
+                <span class="label">
+                    User ID
+                </span>
+
+                <span
+                    id="user-id"
+                    class="user-id"
+                >
+                    ---
+                </span>
 
             </div>
 
@@ -73,7 +95,7 @@
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
     <!-- Application JavaScript -->
-    <script src="app.js?v=5"></script>
+    <script src="app.js?v=6"></script>
 
 </body>
 

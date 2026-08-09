@@ -1,60 +1,131 @@
 // Get the Telegram WebApp object
 const tg = window.Telegram.WebApp;
 
-// Initialize the Telegram Mini App
+
+// Initialize the Mini App
 tg.ready();
+
 
 // Expand the Mini App
 tg.expand();
 
 
 // Get HTML elements
-const welcomeElement = document.getElementById("welcome");
-const firstNameElement = document.getElementById("first-name");
-const lastNameElement = document.getElementById("last-name");
-const usernameElement = document.getElementById("username");
-const userIdElement = document.getElementById("user-id");
-const mainButton = document.getElementById("main-button");
+const welcomeElement =
+    document.getElementById("welcome");
+
+const profilePhoto =
+    document.getElementById("profile-photo");
+
+const profilePlaceholder =
+    document.getElementById("profile-placeholder");
+
+const fullNameElement =
+    document.getElementById("full-name");
+
+const usernameElement =
+    document.getElementById("username");
+
+const userIdElement =
+    document.getElementById("user-id");
+
+const mainButton =
+    document.getElementById("main-button");
 
 
 // Get Telegram user data
-// برای احراز هویت امن مناسب نیست.
-const user = tg.initDataUnsafe?.user;
+const user =
+    tg.initDataUnsafe?.user;
 
 
-// Check if the user exists
+// Check if user data exists
 if (user) {
 
+    // First name
+    const firstName =
+        user.first_name || "";
+
+    // Last name
+    const lastName =
+        user.last_name || "";
+
+
+    // Full name
+    const fullName =
+        `${firstName} ${lastName}`.trim();
+
+
+    // Display welcome message
     welcomeElement.textContent =
-        `Hello ${user.first_name || "User"} 👋`;
+        `Hello ${firstName || "User"} 👋`;
 
-    firstNameElement.textContent =
-        user.first_name || "---";
 
-    lastNameElement.textContent =
-        user.last_name || "---";
+    // Display full name
+    fullNameElement.textContent =
+        fullName || "User";
 
-    usernameElement.textContent =
-        user.username
-            ? `@${user.username}`
-            : "---";
 
+    // Display username
+    if (user.username) {
+
+        usernameElement.textContent =
+            `@${user.username}`;
+
+    } else {
+
+        usernameElement.textContent =
+            "No username";
+
+    }
+
+
+    // Display User ID
     userIdElement.textContent =
         user.id || "---";
 
+
+    // Display profile photo
+    if (user.photo_url) {
+
+        profilePhoto.src =
+            user.photo_url;
+
+        profilePhoto.style.display =
+            "block";
+
+        profilePlaceholder.style.display =
+            "none";
+
+    } else {
+
+        // Use first letter as placeholder
+        const firstLetter =
+            firstName.charAt(0).toUpperCase();
+
+        profilePlaceholder.textContent =
+            firstLetter || "?";
+
+    }
+
 } else {
 
+    // User data is not available
     welcomeElement.textContent =
         "User information is not available.";
 
-    firstNameElement.textContent = "---";
-    lastNameElement.textContent = "---";
-    usernameElement.textContent = "---";
-    userIdElement.textContent = "---";
+    fullNameElement.textContent =
+        "Unknown User";
+
+    usernameElement.textContent =
+        "No username";
+
+    userIdElement.textContent =
+        "---";
+
 }
 
 
-// Handle button click
+// Test button
 mainButton.addEventListener("click", () => {
 
     tg.showAlert(
@@ -62,4 +133,3 @@ mainButton.addEventListener("click", () => {
     );
 
 });
-
